@@ -1,13 +1,13 @@
 import { Link, createLazyFileRoute } from '@tanstack/react-router';
 import { useFetchPosts } from '../hooks/useFetchPosts';
-import { PostForm } from '../components/PostForm';
+import { CreatePostForm } from '../components/CreatePostForm';
 
 const Index = () => {
   const { data, isLoading } = useFetchPosts();
 
   return (
     <div>
-      <PostForm />
+      <CreatePostForm />
       {isLoading ? (
         'Loading...'
       ) : (

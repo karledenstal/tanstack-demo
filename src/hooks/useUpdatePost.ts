@@ -5,9 +5,9 @@ interface UpdatePostArgs {
   body: string;
 }
 
-export const useUpdatePost = (id: string, body: UpdatePostArgs) => {
+export const useUpdatePost = (id: string) => {
   return useMutation({
-    mutationFn: async () => {
+    mutationFn: async (body: UpdatePostArgs) => {
       return await fetch(`https://dummyjson.com/posts/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },

@@ -1,12 +1,15 @@
 import { useForm } from '@tanstack/react-form';
 import { useStore } from '@tanstack/react-store';
 import { store } from '../stores/store';
+import { useCreatePost } from '../hooks/useCreatePost';
 
-export const PostForm = ({ buttonLabel = "Create" }: { buttonLabel?: string }) => {
+export const CreatePostForm = ({ buttonLabel = "Create" }: { buttonLabel?: string }) => {
   const { title: defaultTitle, body: defaultBody } = useStore(
     store,
     (state) => state
   );
+
+  const { mutate } = useCreatePost();
 
   const form = useForm({
     defaultValues: {
@@ -14,7 +17,7 @@ export const PostForm = ({ buttonLabel = "Create" }: { buttonLabel?: string }) =
       body: defaultBody,
     },
     onSubmit: async ({ value }) => {
-      console.log('val', value);
+      mutate(value)
     },
   });
 

@@ -1,30 +1,17 @@
-import { createFileRoute, useRouter } from '@tanstack/react-router';
+import { createFileRoute } from '@tanstack/react-router';
 import { Post, User } from '../types';
 import { useState } from 'react';
-import { PostForm } from '../components/PostForm';
 import { store } from '../stores/store';
-import { useUpdatePost } from '../hooks/useUpdatePost';
+import { UpdatePostForm } from '../components/UpdatePostForm';
 
 export const PostComponent = () => {
-  const router = useRouter();
-  const [formValues, setFormValues] = useState(null)
   const [isEditing, setIsEditing] = useState(false);
   const data = Route.useLoaderData();
-  const { mutate } = useUpdatePost(data?.post?.id.toString(), {
-    title: data?.post?.title,
-    body: data?.post?.body,
-  });
-
-  const onFormSubmit = (values: { title: string; body: string }) => {
-    setFormValues(values)
-    mutate();
-    setIsEditing(false);
-
-    router.invalidate();
-  };
 
   const onEdit = () => {
-    store.setState(() => ({
+    store.setState((state) => ({
+      ...state,
+      id: data?.post?.id.toString(),
       title: data?.post?.title,
       body: data?.post?.body,
     }));
@@ -35,7 +22,7 @@ export const PostComponent = () => {
   return (
     <>
       {isEditing ? (
-        <PostForm buttonLabel="Save" />
+        <UpdatePostForm />
       ) : (
         <div className="flex flex-col gap-4">
           <div className="flex flex-col gap-1">
