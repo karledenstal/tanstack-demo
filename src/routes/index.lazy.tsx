@@ -1,15 +1,17 @@
 import { Link, createLazyFileRoute } from '@tanstack/react-router';
 import { useFetchPosts } from '../hooks/useFetchPosts';
+import { PostForm } from '../components/PostForm';
 
 const Index = () => {
   const { data, isLoading } = useFetchPosts();
 
   return (
     <div>
+      <PostForm />
       {isLoading ? (
         'Loading...'
       ) : (
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 mt-10">
           {data?.posts.map((post) => (
             <div
               className="rounded-md border border-zinc-800 p-4"
