@@ -2,7 +2,7 @@ import { useForm } from '@tanstack/react-form';
 import { useStore } from '@tanstack/react-store';
 import { store } from '../stores/store';
 
-export const PostForm = () => {
+export const PostForm = ({ buttonLabel = "Create" }: { buttonLabel?: string }) => {
   const { title: defaultTitle, body: defaultBody } = useStore(
     store,
     (state) => state
@@ -61,7 +61,7 @@ export const PostForm = () => {
         type="submit"
         className="rounded-sm bg-zinc-900 border border-zinc-800 p-2 text-zinc-300"
       >
-        Create
+        {buttonLabel}
       </button>
     </form>
   );
